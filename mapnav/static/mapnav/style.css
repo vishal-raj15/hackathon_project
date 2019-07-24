@@ -1,0 +1,30 @@
+.container{
+background-color: rgb(49, 58, 58);
+    height: 480px;
+    width: 400px;
+    border-radius: 10px;
+    opacity: 0.9;
+}
+
+.container1{
+    
+        height: 300px;
+        width: 400px;
+        border-radius: 10px;
+       
+        margin-left: 500px;
+        margin-top: 30px;
+    }
+
+h1{
+    color: white;
+    text-align: center;
+}
+
+.form{
+
+    padding-left: 500px;
+    padding-top: 150px;
+}
+
+

@@ -1,0 +1,30 @@
+{% extends 'mapnav/first.html'%}
+
+{% load crispy_forms_tags%}
+
+{% block body%}
+
+{% load static%}
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="{% static 'mapnav/style.css'%}" type="text/css">
+
+<div class="col my-5">
+<div class="form-group col-md-4">
+<div class="container-float">
+        
+<form method="POST">
+    {% csrf_token %}
+    {{form|crispy}} 
+    
+    <button class="btn btn-outline-success btn-block "type="submit">login</button>
+
+</form>
+    
+
+</div></div></div>
+
+
+   
+
+{% endblock%}

@@ -1,0 +1,52 @@
+{% extends 'mapnav/index.html'%}
+
+{% block title%} order {% endblock %}
+{%block body %}
+
+{% load static%}
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="{% static 'mapnav/style.css'%}" type="text/css">
+
+<style type="text/css">
+
+    body { 
+           background: url('{% static "mapnav/ev.jpg" %}');
+    }
+    </style>
+<div class="container-float">
+
+<form method="POST" action="/mapnav/order/">
+
+        {% csrf_token %}
+
+        <div class="col my-5">
+        <div class="form-group col-md-4">
+           
+          
+          <input type="name" class="form-control" id="name" name="name" placeholder="Name">
+        </div>
+
+        <div class="form-group col-md-4">
+         
+                <input type="tel" class="form-control" id="phone" name="phone" placeholder="phone no.">
+              </div>
+
+        <div class="form-group col-md-4">
+         
+          <input type="number" class="form-control" id="amount" name="amount" placeholder="Enter Amount">
+        </div>
+
+        <div class="form-group col-md-4">
+        <button class="btn btn-outline-success btn-block" type="submit">Place My Order</button>
+        </div>
+    
+</form>
+</div>
+</div>
+
+{% endblock %}
+
+
+
+

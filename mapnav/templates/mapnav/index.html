@@ -1,0 +1,188 @@
+<!DOCTYPE html>      <!-- enter ! and then press tab-->
+<html lang="en">
+<head>
+
+    
+    <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1 ,shrink-to-fit=no ">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>Document</title>
+    
+   <style>
+#map {
+  height: 100%;
+}
+/* Optional: Makes the sample page fill the window. */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+</style>
+
+
+</head>
+<body>
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+                <a class="navbar-brand" href="">INCUBATE.com</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsenavbar" >
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+              
+                <div class="collapse navbar-collapse" id="collapsenavbar">
+                  <ul class="navbar-nav ">
+                    <li class="nav-item ">
+                      <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    
+                   
+                    <li class="nav-item">
+                      <a class="nav-link disabled" class="btn btn-space" href="#" tabindex="-1" aria-disabled="true">contact us</a>
+                    </li>
+                    
+                    <li class="nav-item1">
+                      <a class="nav-link" href="#"> welcome! {{user.username}}</a>
+                    </li>
+
+                    <li class="nav-item2">
+                    <i class="material-icons" style="font-size:36px ; color:lightgreen">ev_station</i>
+                    </li>
+
+                    <li class="nav-item">
+                      <a class="btn btn-outline-success my-0 my-sm-0 mr-4" href="/mapnav/order"  > booking</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="btn btn-outline-success my-0 my-sm-0 mr-4" href="/mapnav/activity"  > activity</a>
+                      </li>
+
+                    <li class="nav-item">
+                      <a class="btn btn-outline-success my-0 my-sm-0 mr-4" href="/mapnav/first"> logout </a>
+                    </li>
+
+                  </ul>
+          
+                  
+                  
+                </div>
+              </nav>
+
+              
+
+
+              
+
+            
+              {%block body %}
+
+            <div id="map"></div>
+    <script>
+
+var im = 'http://www.robotwoods.com/dev/misc/bluecircle.png';
+      // Note: This example requires that you consent to location sharing when
+      // prompted by your browser. If you see the error "The Geolocation service
+      // failed.", it means you probably did not give permission for the browser to
+      // locate you.
+      var map, infoWindow;
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: -34.397, lng: 150.644},
+          zoom: 15,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+
+        
+          
+        });
+        infoWindow = new google.maps.InfoWindow;
+
+        var mark1 = new google.maps.Marker({
+               position: new google.maps.LatLng(25.6045, 85.0733),
+               map: map,
+               title:"m1"
+            });
+
+        var mark2 = new google.maps.Marker({
+               position: new google.maps.LatLng(25.6166, 85.0497),
+               map: map,
+               title:"m2"
+            });
+
+        var mark3 = new google.maps.Marker({
+               position: new google.maps.LatLng(25.6163, 85.0751),
+               map: map,
+               title:"m3!"
+            });
+
+        // Try HTML5 geolocation.
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+            var pos = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude,
+              
+            };
+
+            function geoSuccess(position) {
+            var lat = position.coords.latitude;
+             var lng = position.coords.longitude;
+             alert("lat:" + lat + " lng:" + lng);
+               codeLatLng(lat, lng);
+              }
+
+            var marker = new google.maps.Marker({position: pos, map: map , icon:im});
+
+            infoWindow.setPosition(pos);
+            infoWindow.setContent('Location found.');
+            infoWindow.open(map);
+            map.setCenter(pos);
+          }, function() {
+            handleLocationError(true, infoWindow, map.getCenter());
+          });
+        } else {
+          // Browser doesn't support Geolocation
+          handleLocationError(false, infoWindow, map.getCenter());
+        }
+      }
+
+      function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+        infoWindow.setPosition(pos);
+        infoWindow.setContent(browserHasGeolocation ?
+                              'Error: The Geolocation service failed.' :
+                              'Error: Your browser doesn\'t support geolocation.');
+        infoWindow.open(map);
+      }
+    </script>
+
+<script>
+
+
+    function getLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.watchPosition(showPosition);
+      }
+    }
+        
+    function showPosition(position) {
+        alert("Latitude: " + position.coords.latitude + 
+        " , Longitude: " + position.coords.longitude);
+    }
+    </script>
+    
+    <body onload='getLocation()'>
+
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDqh6R04CLLi6I1CBlDiPUOaMS0hfzGSQk&callback=initMap">
+    </script>
+
+        
+{% endblock %}
+
+
+            </body>
+</html>
