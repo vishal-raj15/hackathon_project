@@ -6,8 +6,8 @@ then login . Login paage would redirect user to home page which shows a user cur
 the map would show the (nearest route amoung markers and information about power stations( which is not yet implemented)) ,
 there is a booking button for booking for get his/her electric car fully charged.  
 
-YOU CAN VISIT MY WEBSITE :
+YOU CAN THE prototype WEBSITE :
 
 ->> [visit here](https://beginners.herokuapp.com/mapnav/first/)
 
-it's just a prototype!
+
