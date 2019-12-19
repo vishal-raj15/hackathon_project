@@ -8,6 +8,6 @@ there is a booking button for booking for get his/her electric car fully charged
 
 YOU CAN THE prototype WEBSITE :
 
-->> [visit here](https://beginners.herokuapp.com/mapnav/first/)
+https://beginners.herokuapp.com/mapnav/first/
 
 
