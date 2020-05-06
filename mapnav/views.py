@@ -46,6 +46,12 @@ def order(request):
 
     return render(request , 'mapnav/order.html')
 
+def login(request):
+    if request.method == 'POST':
+        if not request.POST.get('remember',None):
+            request.session.set_expiry(0)
+    return redirect("/mapnav/login/")
+
 
 def logout(request):
     #messages.success(request, f'{username} have been logged out! ')
