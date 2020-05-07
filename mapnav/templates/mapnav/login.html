@@ -17,6 +17,8 @@
     {% csrf_token %}
     {{form|crispy}} 
     
+    <label class="checkbox">
+    <input type="checkbox" name="remember"/> Remember me </label>
     <button class="btn btn-outline-success btn-block "type="submit">login</button>
 
 </form>
