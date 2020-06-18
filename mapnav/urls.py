@@ -13,6 +13,7 @@ urlpatterns = [
     path("login/",LoginView.as_view(template_name='mapnav/login.html'),name='login'),
     path("logout/",LogoutView.as_view(template_name='mapnav/first.html'),name='logout'),
     path("order/", views.order , name='order'),
+    path("handlerequest/", views.handlerequest , name='handlerequest'),
     path("activity/", views.activity , name='activity'),
     #path("logout/",auth_views.logout, {next_page : 'mapnav : first'} , name='logout'),
    # path("booking/",views.booking,name='booking'),

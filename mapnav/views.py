@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 from django.shortcuts import render,redirect
 #from django.contrib.auth.forms import UserCreationForm
 
@@ -7,11 +9,13 @@ from django.contrib import messages
 
 from django.contrib.auth.decorators import login_required
 
-
-
+from django.views.decorators.csrf import csrf_exempt
+from django.http import HttpResponse
 from .models import Order
-
-
+import hashlib
+import json
+from paytm import Checksum
+MERCHANT_KEY = 'b48l%RLDpZTn17zd'
 
 
 
@@ -39,10 +43,27 @@ def order(request):
         name = request.POST.get('name', '')
         amount = request.POST.get('amount', '')
         phone = request.POST.get('phone', '')
-        
+
+        strdata = str(name)+str(amount)+str(phone)
+
+        string = json.dumps(strdata).encode('utf-8')
+        order_id = hashlib.sha256(string).hexdigest()
         order=Order(name=name,amount=amount, phone=phone)
         order.save()
-        
+
+        param_dict = {
+
+                'MID':'kaKgCA19293434392137',   
+                'ORDER_ID':str(order_id),
+                'TXN_AMOUNT':str(amount),
+                'CUST_ID':'acfff@paytm.com',
+                'INDUSTRY_TYPE_ID':'Retail',
+                'WEBSITE':'WEBSTAGING',
+                'CHANNEL_ID':'WEB',
+	            'CALLBACK_URL':'http://127.0.0.1:8000/mapnav/handlerequest/',
+        }
+        param_dict['CHECKSUMHASH'] = Checksum.generate_checksum(param_dict, MERCHANT_KEY)
+        return render(request, 'mapnav/paytm.html' , {'param_dict':param_dict})
 
     return render(request , 'mapnav/order.html')
 
@@ -76,8 +97,7 @@ def signup(request):
 
     #return HttpResponseRedirect("/mapnav/first/")
 
-
-
-    
-
-
+@csrf_exempt
+def handlerequest(request):
+    return HttpResponse('done')
+    pass
