@@ -16,6 +16,7 @@ import hashlib
 import json
 from paytm import Checksum
 MERCHANT_KEY = 'b48l%RLDpZTn17zd'
+import datetime
 
 
 
@@ -43,8 +44,9 @@ def order(request):
         name = request.POST.get('name', '')
         amount = request.POST.get('amount', '')
         phone = request.POST.get('phone', '')
-
-        strdata = str(name)+str(amount)+str(phone)
+        timeval = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")
+        strdata = str(name)+str(amount)+str(phone)+str(timeval)
+        
 
         string = json.dumps(strdata).encode('utf-8')
         order_id = hashlib.sha256(string).hexdigest()
